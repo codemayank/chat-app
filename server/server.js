@@ -3,12 +3,11 @@ const path = require("path");
 const express = require("express");
 
 const publicPath = path.join(__dirname, '../public');
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(express.static('publicPath'));
+app.use(express.static(publicPath));
 
-
-app.listen(PORT, function(){
-  console.log('the server is now running on port ' + PORT);
+app.listen(port, function(){
+  console.log(`server is up on ${port}`);
 })
