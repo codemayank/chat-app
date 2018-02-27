@@ -15,6 +15,16 @@ let io = socketIO(server);
 io.on('connection', (socket) => {
   console.log('new user connected');
 
+  socket.emit('message', {
+    from : 'Admin',
+    text : 'welcome to chat app'
+  });
+
+  socket.broadcast.emit('message', {
+    from : 'Admin',
+    text: 'new user joined'
+  })
+
   socket.on('createMessage', (message)=>{
     console.log('new message', message);
     io.emit('message', {
@@ -22,6 +32,11 @@ io.on('connection', (socket) => {
       text: message.text,
       createdAt: new Date().getTime()
     });
+  //   socket.broadcast.emit('message', {
+  //     from: message.from,
+  //     text:message.text,
+  //     createdAt: new Date().getTime()
+  //   });
   });
 
   socket.on('disconnect', ()=> {
