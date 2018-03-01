@@ -23,11 +23,12 @@ io.on('connection', (socket) => {
   socket.on('createMessage', (message, callback)=>{
     console.log('new message', message);
     io.emit('message', generateMessage(message.from, message.text));
-    callback('The message was successfully received by the server!');
-    socket.on('createLocationMessage', (coords) => {
-      io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
-    })
+    callback('');
   });
+
+  socket.on('createLocationMessage', (coords) => {
+    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+  })
 
   socket.on('disconnect', ()=> {
     console.log('client disconnected');
